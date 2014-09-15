@@ -3,18 +3,32 @@
     <div class="sixteen wide column">
       <h1>Overview</h1>
       <p>
-        <a href="${review.url}">${review.title}</a> is
-        <span tal:condition="python:review.type == 'NEW'">a new charm</span>
-        <span tal:condition="python:review.type == 'UPDATE'">an update
-            <span tal:condition="python:review.project">to ${review.project.name}</span></span>
-        which was created by ${review.owner.name} on ${review.created} and last updated ${review.age}ays
-        ago with a vote spread of +${len(review.positive_votes)} and -${len(review.negative_votes)}.
-        At this time is in ${review.state_inflect} "${review.state.capitalize()}" state and requires attention from
-        <span tal:condition="python:review.user_followup">${review.owner.name}</span>
-        <span tal:condition="python:review.reviewer_followup">a reviewer</span>
-        <span tal:condition="python: not review.reviewer_followup and not review.user_followup">no one</span>.
+        <a href="${review.url}" target="_blank">${review.title}</a> is
+        <ul>
+          <li>
+            <span tal:condition="python:review.type == 'NEW'">a new charm</span>
+          </li>
+          <li>
+            <span tal:condition="python:review.type == 'UPDATE'">an update
+              <span tal:condition="python:review.project">to ${review.project.name}</span></span>
+          </li>
+          <li>
+            which was created by ${review.owner.name} on ${review.created} and last updated ${review.age}ays
+            ago with a vote spread of +${len(review.positive_votes)} and -${len(review.negative_votes)}.
+          </li>
+        </ul>
+        <ul>
+        At this time is
+        <li>in ${review.state_inflect} "${review.state.capitalize()}" state</li>
+        <li>requires attention from
+          <span tal:condition="python:review.user_followup">${review.owner.name}</span>
+          <span tal:condition="python:review.reviewer_followup">a reviewer</span>
+          <span tal:condition="python: not review.reviewer_followup and not review.user_followup">no one</span>.
+        </li>
+        </ul>
         <span tal:condition="review.locked">
           It has been locked for review by ${review.locker.name} since ${review.locked}
+
         </span>
       </p>
     </div>
